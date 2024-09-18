@@ -32,20 +32,20 @@ RUN rosdep init && rosdep update
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
 # Copy the bag with the images
-COPY files/mission_1.bag /home/mission_1.bag
+COPY files/elektroHall_flight1_minimum.bag /home/elektroHall_flight1_minimum.bag
 
 # Make the catkin workspace
 RUN cd /home && mkdir catkin_ws && cd catkin_ws && mkdir src \
     && source /opt/ros/noetic/setup.bash && catkin_make \
     && echo "source /home/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
-# Create the image_processor package
-RUN cd /home/catkin_ws/src  \
-    && source /opt/ros/noetic/setup.bash && source /home/catkin_ws/devel/setup.bash \
-    && catkin_create_pkg image_processor sensor_msgs rospy cv_bridge std_msgs image_transport --rosdistro noetic\
+# Copy the pointcloud_processor package and build
+COPY pointcloud_processor /home/catkin_ws/src/pointcloud_processor
+
+# Create the pointcloud_processor package
+RUN source /opt/ros/noetic/setup.bash && source /home/catkin_ws/devel/setup.bash \
     && cd /home/catkin_ws \
     && catkin_make
-COPY image_processor.py /home/catkin_ws/src/image_processor/src/image_processor.py
 
 # Set the entrypoint to bash
 ENTRYPOINT [ "bin/bash", "-c", "source /opt/ros/noetic/setup.bash && roscore" ]
