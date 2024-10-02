@@ -42,10 +42,14 @@ RUN cd /home && mkdir catkin_ws && cd catkin_ws && mkdir src \
 # Copy the pointcloud_processor package and build
 COPY pointcloud_processor /home/catkin_ws/src/pointcloud_processor
 
-# Create the pointcloud_processor package
+# Copy the statistical_outlier_removal_filter service and build
+COPY statistical_outlier_removal_filter /home/catkin_ws/src/statistical_outlier_removal_filter
+
+# Create the pointcloud_processor package and the srv_statistical_outlier service
 RUN source /opt/ros/noetic/setup.bash && source /home/catkin_ws/devel/setup.bash \
     && cd /home/catkin_ws \
     && catkin_make
+
 
 # Set the entrypoint to bash
 ENTRYPOINT [ "bin/bash", "-c", "source /opt/ros/noetic/setup.bash && roscore" ]

@@ -4,6 +4,10 @@ Code to do the in class assignments in cyberphysical connected vehicle systems a
 ## Images
 You can find the already built images here: https://hub.docker.com/repository/docker/sindrehegre/ros-noetic-vecsys/general
 
+## Day 3
+
+You know the drill
+
 ## Day 2
 
 docker pull sindrehegre/ros-noetic-vecsys:day2
