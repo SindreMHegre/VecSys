@@ -4,17 +4,25 @@ Code to do the in class assignments in cyberphysical connected vehicle systems a
 ## Images
 You can find the already built images here: https://hub.docker.com/repository/docker/sindrehegre/ros-noetic-vecsys/general
 
-## Day 3
+## Day 4 Actions in ROS
+
+This creates a action service that simulates moving a robot arm just to get to know actions in ROS.
+
+docker pull sindrehegre/ros-noetic-vecsys:day4
+
+## Day 3 Services on pointclouds
 
 You know the drill
 
-## Day 2
+docker pull sindrehegre/ros-noetic-vecsys:day3
+
+## Day 2 Topics with pointclouds
 
 docker pull sindrehegre/ros-noetic-vecsys:day2
 
 then mostly same as day1, image_processor changed name to pointcloud_processor and the bag has a new name
 
-## Day 1
+## Day 1 Topics with images
 This is the image for the fist day:
 
 docker pull sindrehegre/ros-noetic-vecsys:mission1-bag
