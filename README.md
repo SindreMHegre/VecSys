@@ -1,39 +1,15 @@
-# VecSys
-Code to do the in class assignments in cyberphysical connected vehicle systems at NTNU
+## Assignment 1
 
-## Images
-You can find the already built images here: https://hub.docker.com/repository/docker/sindrehegre/ros-noetic-vecsys/general
+### Implements a node which runs the ICP algorithm
 
-## Day 4 Actions in ROS
+docker pull sindrehegre/ros-noetic-vecsys:assignment1
 
-This creates a action service that simulates moving a robot arm just to get to know actions in ROS.
+docker run -it sindrehegre/ros-noetic-vecsys:assignment1
 
-docker pull sindrehegre/ros-noetic-vecsys:day4
+### In other docker terminals:
 
-## Day 3 Services on pointclouds
+rosrun icp icp
 
-You know the drill
+rosbag play home/outster_lidar.bag
 
-docker pull sindrehegre/ros-noetic-vecsys:day3
-
-## Day 2 Topics with pointclouds
-
-docker pull sindrehegre/ros-noetic-vecsys:day2
-
-then mostly same as day1, image_processor changed name to pointcloud_processor and the bag has a new name
-
-## Day 1 Topics with images
-This is the image for the fist day:
-
-docker pull sindrehegre/ros-noetic-vecsys:mission1-bag
-
-docker run -it sindrehegre/ros-noetic-vecsys:mission1-bag
-
-Then in two new terminals in the same container:
-
-[1] rosrun image_processor image_processor.py
-
-[2] rosbag play home/mission_1.bag
-
-The image_processor will publish to /processed_image
-
+#### The icp node publishes to /icp_transform

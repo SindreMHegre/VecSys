@@ -32,20 +32,17 @@ RUN rosdep init && rosdep update
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
 # Copy the bag with the images
-COPY files/elektroHall_flight1_minimum.bag /home/elektroHall_flight1_minimum.bag
+COPY files/2021-04-12-11-06-47-easy.bag /home/outster_lidar.bag
 
 # Make the catkin workspace
 RUN cd /home && mkdir catkin_ws && cd catkin_ws && mkdir src \
     && source /opt/ros/noetic/setup.bash && catkin_make \
     && echo "source /home/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
-# Copy the pointcloud_processor package and build
-COPY pointcloud_processor /home/catkin_ws/src/pointcloud_processor
+# Copy the ICP package
+COPY icp /home/catkin_ws/src/icp
 
-# Copy the statistical_outlier_removal_filter service and build
-COPY statistical_outlier_removal_filter /home/catkin_ws/src/statistical_outlier_removal_filter
-
-# Create the pointcloud_processor package and the srv_statistical_outlier service
+# Create the ICP package
 RUN source /opt/ros/noetic/setup.bash && source /home/catkin_ws/devel/setup.bash \
     && cd /home/catkin_ws \
     && catkin_make

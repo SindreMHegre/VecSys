@@ -1,7 +1,7 @@
 <package format="2">
-  <name>pointcloud_processor</name>
+  <name>icp</name>
   <version>0.0.0</version>
-  <description>The pointcloud_processor package</description>
+  <description>Node that runs ICP algorithm</description>
 
   <maintainer email="user@todo.todo">Your Name</maintainer>
   <license>TODO</license>
@@ -12,10 +12,15 @@
   <build_depend>sensor_msgs</build_depend>
   <build_depend>pcl_ros</build_depend>
   <build_depend>pcl_conversions</build_depend>
+  <build_depend>tf2</build_depend>
+  <build_depend>tf2_ros</build_depend>
+
 
   <exec_depend>roscpp</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>pcl_ros</exec_depend>
   <exec_depend>pcl_conversions</exec_depend>
+  <exec_depend>tf2</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
 
 </package>
