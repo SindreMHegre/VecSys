@@ -1,6 +1,12 @@
 # VecSys
 Code to do the in class assignments in cyberphysical connected vehicle systems at NTNU
 
+# Ros2
+Since I'm able to install ros2 locally there will be no more docker images
+
+## Day 2
+The new voxelfilter can be found in Ros2/pointcloud_processor
+
 ## Images
 You can find the already built images here: https://hub.docker.com/repository/docker/sindrehegre/ros-noetic-vecsys/general
 
