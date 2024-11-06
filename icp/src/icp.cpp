@@ -12,12 +12,12 @@
 
 ros::Publisher pub_transform;
 
-// Should take the last point cloud and calculate the transformation to the current point cloud and then publish for the tf library to use
-
-// Store the previous point cloud to calculate the transformation
+// Store the previous point cloud to calculate the transformation between consecutive point clouds
 pcl::PointCloud<pcl::PointXYZ>::Ptr previous_cloud(new pcl::PointCloud<pcl::PointXYZ>());
 bool first_cloud_received = false;
 
+// This callback is called every time a new point cloud is received.
+// It performs ICP between the previous and current pointclound and publishes the transformation between them.
 void icp_callback(const sensor_msgs::PointCloud2ConstPtr& cloud_msg) {
     // Convert the incoming point cloud from ROS format to PCL format
     pcl::PointCloud<pcl::PointXYZ>::Ptr current_cloud(new pcl::PointCloud<pcl::PointXYZ>());
@@ -38,7 +38,7 @@ void icp_callback(const sensor_msgs::PointCloud2ConstPtr& cloud_msg) {
         return;
     }
 
-    // Perform ICP to find the transformation from the previous cloud to the current cloud
+    // Set up the ICP algorithm
     pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ> icp;
     icp.setInputSource(previous_cloud);
     icp.setInputTarget(current_cloud);
@@ -60,6 +60,7 @@ void icp_callback(const sensor_msgs::PointCloud2ConstPtr& cloud_msg) {
 
         // Convert the transformation matrix to a TransformStamped message
         geometry_msgs::TransformStamped transform_msg;
+        // Keep the timestamp of current point cloud to match the transformation to the correct time
         transform_msg.header.stamp = cloud_msg->header.stamp;
         transform_msg.header.frame_id = "previous_frame"; // Frame ID of the previous point cloud
         transform_msg.child_frame_id = "current_frame";   // Frame ID of the current point cloud
